@@ -1,0 +1,53 @@
+<!DOCTYPE HTMl>
+<html>
+    <head>
+        <title>Register Form</title>
+    </head>
+    <body>
+        <form action="insertion.php" method="POST">
+            <table>
+                <tr>
+                    <td>Name :</td>
+                    <td><input type="text" name="username"></td>
+                </tr>
+                <tr>
+                    <td>Address :</td>
+                    <td><input type="Address" name="Address" ></td>
+                </tr>
+                <tr>
+                    <td>Gender :</td>
+                    <td>
+                    <input type="radio" name="gender" value="m">Male
+                    <input type="radio" name="gender" value="f">Female
+                    </td>
+                </tr>
+                <tr>
+                    <td>Email :</td>
+                    <td><input type="email" name="email"></td>
+                </tr>
+                <tr>
+                    <td>Phone :</td>
+                    <td>
+                    <select name="PhoneCode">
+                    <option selected hidden value="">Select Code</option>
+                    <option value="061">061</option>
+                    <option value="977">977</option>
+                    <option value="978">978</option>
+                    <option value="945">945</option>
+                    <option value="876">876</option>
+                    <option value="001">001</option>
+                    </select>
+                    <input type="phone" name="phone">
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Submit"></td>
+                </tr>
+            </table>
+        </form>
+        <form action="find.php" method="GET">
+            <input type="text" name="username" required>
+            <input type="submit" value="Search" required>     
+        </form>
+    </body>
+</html>
