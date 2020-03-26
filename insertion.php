@@ -5,8 +5,10 @@ $gender= $_POST['gender'];
 $email= $_POST['email'];
 $phonecode= $_POST['PhoneCode'];
 $phone= $_POST['phone'];
+$action = htmlspecialchars($_GET['action']);
+$id = htmlspecialchars($_GET['id']);
 
-if (!empty($username) && !empty($Address) && !empty($gender) && !empty($email) && !empty($phonecode) && !empty($phone))
+if (!empty($username) && !empty($address) && !empty($gender) && !empty($email) && !empty($phonecode) && !empty($phone))
 {
 	$host = "localhost";
 	$dbUsername = "root";
@@ -23,13 +25,19 @@ if (!empty($username) && !empty($Address) && !empty($gender) && !empty($email) &
 		$sql="select email from mycontacts where email='$email' ";
 		//echo "[".$sql."]";
 		$result = $conn->query($sql);
-		//echo $result."]";
-		if ($result->num_rows > 0) {
-			echo "the email already exists";
-		}else{
+		if($action == 'update') {
+			$sql = "UPDATE mycontacts SET ". "name='$username', Address='$address', gender='$gender', phonecode=$phonecode, phone=$phone". " WHERE id=$id";
+		} else {
 			$sql="insert into mycontacts (name, address, gender, email, phonecode, phone) ";
 			$sql.="values ('$username', '$address', '$gender', '$email', '$phonecode', '$phone')";
-			$result=$conn->query($sql);
+			
+		}
+		//echo $result."]";
+		if ($result->num_rows > 0 && $action == 'insert') {
+			echo "the email already exists";
+		}else{
+			$result=$conn->query($sql) or die(mysqli_error($conn));
+
 			if($result){
 				
 				echo "record added successfully";

@@ -4,7 +4,7 @@
         <title>Register Form</title>
     </head>
     <body>
-        <form action="insertion.php" method="POST">
+        <form action="insertion.php?action=insert" method="POST">
             <table>
                 <tr>
                     <td>Name :</td>
@@ -45,9 +45,43 @@
                 </tr>
             </table>
         </form>
-        <form action="find.php" method="GET">
-            <input type="text" name="username" required>
-            <input type="submit" value="Search" required>     
+        <form action="<?=$_SERVER['PHP_SELF']?>" method="GET">
+            <input type="text" name="username">
+            <input type="submit" value="Search">     
         </form>
     </body>
 </html>
+<?php
+
+if(!empty($_GET['username'])) {
+ $search = $_GET['username'];
+
+$host = "localhost";
+	$dbUsername = "root";
+	$dbPassword = "";
+	$dbname = "mycontacts";
+	
+	
+	//create connection
+    $conn = new mysqli($host, $dbUsername, $dbPassword, $dbname);
+    
+    $sql="select * from mycontacts where name LIKE '%$search%'";
+    //echo "[".$sql."]";
+    $result = $conn->query($sql);
+
+    if($result->num_rows > 0 ) {
+        echo "<p> Your results for <b> name " . $search . "</b> are </p>";
+        while($row = $result->fetch_assoc()){
+            echo "Name:" . $row['name'] . "<br/>";
+            echo "Address:" . $row['Address'] . "<br/>";
+            echo "Gender:" . $row['gender'] . "<br/>";
+            echo "Phone Code:" . $row['phonecode'] . "<br/>";
+            echo "Phone:" . $row['phone'] . "<br/><br />";
+            echo '<a class="button" href="edit.php?id='. $row['id'] .'">Edit</a><br />';
+            
+            echo "-------------------------------- <br />";
+        }
+    }
+
+    $conn->close();
+}
