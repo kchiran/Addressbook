@@ -21,6 +21,6 @@ $host = "localhost";
             echo "Gender:" . $row['gender'] . "<br/>";
             echo "Phone Code:" . $row['phonecode'] . "<br/>";
             echo "Phone:" . $row['phone'] . "<br/>";
-            echo "-------------------------------- <br />";
+            echo "Thank you for your enquiry" . "<br />";
         }
     }

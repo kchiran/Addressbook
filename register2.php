@@ -77,10 +77,10 @@ $host = "localhost";
             echo "Gender:" . $row['gender'] . "<br/>";
             echo "Phone Code:" . $row['phonecode'] . "<br/>";
             echo "Phone:" . $row['phone'] . "<br/><br />";
-            echo '<a class="button" href="edit.php?id='. $row['id'] .'">Edit</a><br />';
-            
-            echo "-------------------------------- <br />";
-        }
+            echo '<a class="button" href="edit.php?id='. $row['id'] .'">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp';
+            echo '<a class="button" href="delete.php?id='. $row['id'] .'">Delete</a> <br />';
+            echo "Thank you for your enquiry "."<br / >";
+       }
     }
 
     $conn->close();

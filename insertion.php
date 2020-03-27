@@ -6,7 +6,7 @@ $email= $_POST['email'];
 $phonecode= $_POST['PhoneCode'];
 $phone= $_POST['phone'];
 $action = htmlspecialchars($_GET['action']);
-$id = htmlspecialchars($_GET['id']);
+$id = isset($_GET['id']) ? $_GET['id'] : '';
 
 if (!empty($username) && !empty($address) && !empty($gender) && !empty($email) && !empty($phonecode) && !empty($phone))
 {
