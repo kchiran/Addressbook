@@ -1,6 +1,7 @@
 <?php
 $username = $_POST['username'];
 $address= $_POST['Address'];
+$city= $_POST['City'];
 $gender= $_POST['gender'];
 $email= $_POST['email'];
 $phonecode= $_POST['PhoneCode'];
@@ -8,7 +9,8 @@ $phone= $_POST['phone'];
 $action = htmlspecialchars($_GET['action']);
 $id = isset($_GET['id']) ? $_GET['id'] : '';
 
-if (!empty($username) && !empty($address) && !empty($gender) && !empty($email) && !empty($phonecode) && !empty($phone))
+if (!empty($username) && !empty($address) && !empty($city)&& !empty($gender) && !empty($email) &&
+ !empty($phonecode) && !empty($phone))
 {
 	$host = "localhost";
 	$dbUsername = "root";
@@ -26,10 +28,11 @@ if (!empty($username) && !empty($address) && !empty($gender) && !empty($email) &
 		//echo "[".$sql."]";
 		$result = $conn->query($sql);
 		if($action == 'update') {
-			$sql = "UPDATE mycontacts SET ". "name='$username', Address='$address', gender='$gender', phonecode=$phonecode, phone=$phone". " WHERE id=$id";
+			$sql = "UPDATE mycontacts SET ". "name='$username', Address='$address', City='$city', gender='$gender', 
+			phonecode=$phonecode, phone=$phone". " WHERE id=$id";
 		} else {
-			$sql="insert into mycontacts (name, address, gender, email, phonecode, phone) ";
-			$sql.="values ('$username', '$address', '$gender', '$email', '$phonecode', '$phone')";
+			$sql="insert into mycontacts (name, address, city, gender, email, phonecode, phone) ";
+			$sql.="values ('$username', '$address', '$city', '$gender', '$email', '$phonecode', '$phone')";
 			
 		}
 		//echo $result."]";
@@ -40,7 +43,7 @@ if (!empty($username) && !empty($address) && !empty($gender) && !empty($email) &
 
 			if($result){
 				
-				echo "record added successfully";
+				echo "Record Added successfully";
 			}else{
 				echo "Err in sql[".$sql."]";
 			}

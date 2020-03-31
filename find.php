@@ -1,6 +1,6 @@
 <?php
 
-$search = $_GET['username'];
+$search =( ($_GET['username']) || ($_GET['address']) || ($_GET['phone'] ) )
 $host = "localhost";
 	$dbUsername = "root";
 	$dbPassword = "";

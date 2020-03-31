@@ -11,6 +11,9 @@
                     <td><input type="text" name="username"></td>
                 </tr>
                 <tr>
+                  <td> City : </td>
+                  <td><input type="text" name="City"></td>
+                <tr>
                     <td>Address :</td>
                     <td><input type="Address" name="Address" ></td>
                 </tr>
@@ -46,17 +49,17 @@
             </table>
         </form>
         <form action="<?=$_SERVER['PHP_SELF']?>" method="GET">
-            <input type="text" name="username">
+            <input type="text" (name="username" || name="Address" || name="phone">
             <input type="submit" value="Search">     
         </form>
     </body>
 </html>
 <?php
 
-if(!empty($_GET['username'])) {
- $search = $_GET['username'];
+if((!empty($_GET['username'])) || (!empty($_GET['address'])) || (!empty($_GET['phone']))) {
+ $search =(($_GET['username']) || ($_GET['address']) || ($_GET['phone']));
 
-$host = "localhost";
+ $host = "localhost";
 	$dbUsername = "root";
 	$dbPassword = "";
 	$dbname = "mycontacts";
@@ -65,7 +68,7 @@ $host = "localhost";
 	//create connection
     $conn = new mysqli($host, $dbUsername, $dbPassword, $dbname);
     
-    $sql="select * from mycontacts where name LIKE '%$search%'";
+    $sql="select * from mycontacts where name LIKE '%$search%' OR Address LIKE '%$search%' OR phone LIKE '%$search%'";
     //echo "[".$sql."]";
     $result = $conn->query($sql);
 
@@ -74,6 +77,7 @@ $host = "localhost";
         while($row = $result->fetch_assoc()){
             echo "Name:" . $row['name'] . "<br/>";
             echo "Address:" . $row['Address'] . "<br/>";
+            echo "City:" . $row['City'] . "<br />";
             echo "Gender:" . $row['gender'] . "<br/>";
             echo "Phone Code:" . $row['phonecode'] . "<br/>";
             echo "Phone:" . $row['phone'] . "<br/><br />";
